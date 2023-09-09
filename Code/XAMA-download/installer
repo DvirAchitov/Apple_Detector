@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# XAMPP-CLI Installer - this script just copy xampp-cli file into /usr/bin/xampp
+# Based on XAMPP Starter:
+# https://github.com/ziyaddin/xampp
+# 
+
+FILE="xampp-cli"
+
+if [ -f $FILE ];
+then
+  echo -e "\033[32mFile $FILE found.\033[0m"
+
+  #starting main process...
+    while true
+    do
+      echo -n "Please confirm (y or n): "
+      read CONFIRM
+
+      case $CONFIRM in
+      y|Y|YES|yes|Yes)
+        
+        #copying xampp file to /usr/bin
+        chmod +x xampp-cli
+        sudo cp xampp-cli /usr/bin/xampp
+        break
+        ;;
+  
+      n|N|no|NO|No)
+        echo -e "\033[31mAborting\033[0m"
+        exit
+        ;;
+  
+      *) echo -e "\033[36m Please enter only y or n!\033[0m"
+      esac
+    done
+  echo -e "\033[32m Installation of $FILE done.\033[0m"
+
+else
+  echo -e "\033[31mFile $FILE does not exist. Please, try again!\033[0m"
+fi
+
